@@ -1,0 +1,45 @@
+Unity Editor version:    2020.3.19f1 (68f137dc9bbe)
+Branch:                  2020.3/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 11.6 (Build 20G165)
+Darwin version:          20.6.0
+Architecture:            x86_64
+Running under Rosetta:   NO
+Available memory:        8192 MB
+Using pre-set license
+Pro License: NO
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/2020.3.19f1/Unity.app/Contents/MacOS/Unity
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker4
+-projectPath
+/Users/lejan/Documents/Github/Entregable7
+-logFile
+Logs/AssetImportWorker4.log
+-srvPort
+53881
+Successfully changed project path to: /Users/lejan/Documents/Github/Entregable7
+/Users/lejan/Documents/Github/Entregable7
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 337.83 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.19f1 (68f137dc9bbe)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/2020.3.19f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/lejan/Documents/Github/Entregable7/Assets
+GfxDevice: creating device client; threaded=0
+2022-02-17 18:43:22.277 Unity[41959:3430042] iMac preferred device: AMD Radeon Pro 555X (high power)
+2022-02-17 18:43:22.277 Unity[41959:3430042] Metal devices available: 1
+2022-02-17 18:43:22.277 Unity[41959:3430042] 0: AMD Radeon Pro 555X (high power)
+2022-02-17 18:43:22.277 Unity[41959:3430042] Using device AMD Radeon Pro 555X (high power)
+Initializing Metal device caps: AMD Radeon Pro 555X
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/2020.3.19f1/Unity.app/Contents/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/2020.3.19f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = '/Applications/Unity/Hub/Editor/2020.3.19f1/Unity.app/Contents/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56959
+Begin MonoManager ReloadAssembly
