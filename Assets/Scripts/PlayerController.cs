@@ -13,9 +13,10 @@ public class PlayerController : MonoBehaviour
     //Se consigue el AudioSource del Player 
     private AudioSource playerAudioSource;
 
-    //Efecto de sonido del globo rebotando
+    //Efecto de sonido del globo rebotando , explotando y recolectando dinero
     public AudioClip Boing;
     public AudioClip boom;
+    public AudioClip blingbling;
 
     //Sistema de particulas
     public ParticleSystem explosion;
@@ -30,9 +31,9 @@ public class PlayerController : MonoBehaviour
     //Limite del suelo
     private float Floor = 0f;
 
-   
+    //Variable que utilizaremos para contar el dinero
+    public int Money;
   
-    // Start is called before the first frame update
     void Start()
     {
         //Asi tenemos el componente rigidbody al empezar
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
         fireworks = Instantiate(fireworks, transform.position, fireworks.transform.rotation);
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         //Si no estamos en gameover
@@ -67,9 +68,10 @@ public class PlayerController : MonoBehaviour
         {
             //Player no supera el techo
             transform.position = new Vector3(transform.position.x, Ylim, transform.position.z);
-
+            //Hace que el player no pueda quedarse atascado en el techo
+            playerRigidbody.AddForce(Vector3.down * impulso, ForceMode.Impulse);
         }
-
+        //Si te chocas con el suelo
         if (transform.position.y < Floor)
         {
            //Reproduce sistema de particulas
@@ -80,15 +82,67 @@ public class PlayerController : MonoBehaviour
             explosion.transform.position = new Vector3(0, 0, 0);
             //Adios globo
             Destroy(gameObject);
+            // game over
+            GameOver();
         }
 
     }
 
+    //Si se choca con un trigger
+    private void OnTriggerEnter(Collider other)
+    {
+        //Si no hay game over
+        if (!gameOver)
+        {
+            //Si se choca con la bomba
+            if (other.gameObject.CompareTag("Bomb"))
+            {
+                //Tapate los oidos, o mejor bajo el volumen de la explosion
+                playerAudioSource.PlayOneShot(boom, 0.5f);
+                //Coloca la explosion donde la bomba colisiona con el player
+                explosion.transform.position = other.gameObject.transform.position;
+                //El sistema de particulas aparece
+                explosion.Play();
+                //Bomba desaperece
+                Destroy(other.gameObject);
+
+                //Player se destruye
+                Destroy(gameObject);
+
+                //Llama a la funcion game over
+                GameOver();
+            }
+            
+            //Si se choca con el dinero
+            if (other.gameObject.CompareTag("Money"))
+            {
+                //Añade uno al dinero obtenido
+                Money++;
+                //Moneda be like, bling bling heheh
+                playerAudioSource.PlayOneShot(blingbling, 1f);
+                //Fuegos artificiales aparecen donde has recolectado el dinero
+                fireworks.transform.position = other.gameObject.transform.position;
+                //Y asi aparecen
+                fireworks.Play();
+                //La moneda se va
+                Destroy(other.gameObject);
+                Debug.Log($"Necesitamos" + Money + "euros menos para comprar un seguro anti pinchazos");
+            }
+
+            
+        }
+    }
+    //Funcion de game over
     private void GameOver()
     {
         //Indica la finalizacion de la partida
         gameOver = true;
-        
+       
 
+        
+    }
+    private void OnDestroy()
+    {
+        playerAudioSource.PlayOneShot(boom, 1f);
     }
 }
